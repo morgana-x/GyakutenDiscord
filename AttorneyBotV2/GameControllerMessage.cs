@@ -13,8 +13,8 @@ namespace AttorneyBotV2
         BTN_RIGHT,
         BTN_UP,
         BTN_DOWN,
-        // BTN_RIGHTBUMPER,
-        // BTN_LEFTBUMPER,
+        BTN_RIGHTBUMPER,
+        BTN_LEFTBUMPER,
     }
 
     class GameButton
@@ -42,8 +42,8 @@ namespace AttorneyBotV2
             [GBA_CONTROL.BTN_B] = "🅱️",
             [GBA_CONTROL.BTN_SELECT] = "⏸️",
             [GBA_CONTROL.BTN_START] = "▶️",
-            //[GBA_CONTROL.BTN_RIGHTBUMPER] = "R",
-            //[GBA_CONTROL.BTN_LEFTBUMPER] = "L",
+            [GBA_CONTROL.BTN_RIGHTBUMPER] = "↩️",
+            [GBA_CONTROL.BTN_LEFTBUMPER] = "↪️",
         };
         static Dictionary<Guid, GameButton> ActiveButtons = new();
 
@@ -71,13 +71,17 @@ namespace AttorneyBotV2
 
             List<DiscordComponent> firstList = new();
             List<DiscordComponent> secondList = new();
+            List<DiscordComponent> thirdList = new();
 
             for (int i = 0; i < 4; i++)
                 AddButton(buttons[i], firstList);
             messageBuilder.AddComponents(firstList);
-            for (int i = 4; i < buttons.Length; i++)
+            for (int i = 4; i < 8; i++)
                 AddButton(buttons[i], secondList);
             messageBuilder.AddComponents(secondList);
+            for (int i = 9; i >= 8; i--)
+                AddButton(buttons[i], thirdList);
+            messageBuilder.AddComponents(thirdList);
 
 
             return messageBuilder;
@@ -90,13 +94,17 @@ namespace AttorneyBotV2
 
             List<DiscordComponent> firstList = new();
             List<DiscordComponent> secondList = new();
+            List<DiscordComponent> thirdList = new();
 
             for (int i = 0; i < 4; i++)
                 AddButton(buttons[i], firstList);
             messageBuilder.AddComponents(firstList);
-            for (int i = 4; i < buttons.Length; i++)
+            for (int i = 4; i < 8; i++)
                 AddButton(buttons[i], secondList);
             messageBuilder.AddComponents(secondList);
+            for (int i = 9; i >= 8; i--)
+                AddButton(buttons[i], thirdList);
+            messageBuilder.AddComponents(thirdList);
 
             return messageBuilder;
         }
