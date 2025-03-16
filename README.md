@@ -3,6 +3,8 @@ Low effort discord bot that sends commands over to an MGBA instance.
 
 do /saiban to create a controller message, reccomended to do it in the VC Chat
 
+or just type !saiban in a channel if you're not bothered to set the GUID
+
 # Setup
 
 Run MGBA and load any Gyakuten Saiban rom, and run the aceattorneybot.lua script (Tools>Scripting>Load Script)
