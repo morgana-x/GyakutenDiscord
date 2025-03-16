@@ -16,6 +16,7 @@ namespace AttorneyBotV2
         BTN_DOWN,
         BTN_RIGHTBUMPER,
         BTN_LEFTBUMPER,
+        BTN_DS_X
     }
 
     class GameButton
@@ -45,19 +46,21 @@ namespace AttorneyBotV2
             [GBA_CONTROL.BTN_START] = "▶️",
             [GBA_CONTROL.BTN_RIGHTBUMPER] = "↩️",
             [GBA_CONTROL.BTN_LEFTBUMPER] = "↪️",
+            [GBA_CONTROL.BTN_DS_X] = "❎",
         };
         public static Dictionary<GBA_CONTROL, int> buttonKeyTranslation = new()
         {
-            [GBA_CONTROL.BTN_LEFT] = 0x4A, // VK_LEFT
-            [GBA_CONTROL.BTN_RIGHT] = 0x4C, // VK_RIGHT
-            [GBA_CONTROL.BTN_DOWN] = 0x4B, // VK_DOWN
-            [GBA_CONTROL.BTN_UP] = 0x49, // VK_UP
+            [GBA_CONTROL.BTN_LEFT] = 0x4A, // J
+            [GBA_CONTROL.BTN_RIGHT] = 0x4C, // L
+            [GBA_CONTROL.BTN_DOWN] = 0x4B, // K
+            [GBA_CONTROL.BTN_UP] = 0x49, // I
             [GBA_CONTROL.BTN_A] = 0x5A, // Z
             [GBA_CONTROL.BTN_B] = 0x58, // X
             [GBA_CONTROL.BTN_SELECT] = 0x43, // C
             [GBA_CONTROL.BTN_START] = 0x56, // V
             [GBA_CONTROL.BTN_RIGHTBUMPER] = 0x4E, // N
             [GBA_CONTROL.BTN_LEFTBUMPER] = 0x42, // B
+            [GBA_CONTROL.BTN_DS_X] = 0x47 // G
         };
 
         static Dictionary<Guid, GameButton> ActiveButtons = new();
@@ -97,6 +100,8 @@ namespace AttorneyBotV2
             messageBuilder.AddComponents(secondList);
             for (int i = 9; i >= 8; i--)
                 AddButton(buttons[i], thirdList);
+            if (dsEmu.Connected && !gBAEmu.Connected)
+                AddButton(buttons[10], thirdList);
             messageBuilder.AddComponents(thirdList);
 
 
@@ -120,6 +125,8 @@ namespace AttorneyBotV2
             messageBuilder.AddComponents(secondList);
             for (int i = 9; i >= 8; i--)
                 AddButton(buttons[i], thirdList);
+            if (dsEmu.Connected && !gBAEmu.Connected)
+                AddButton(buttons[10], thirdList);
             messageBuilder.AddComponents(thirdList);
 
             return messageBuilder;
